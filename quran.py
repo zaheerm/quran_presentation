@@ -10,14 +10,12 @@ Options:
 """
 
 import docopt
-import os,sys,getopt,struct
 import csv
-from cStringIO import StringIO
 from odf.opendocument import OpenDocumentPresentation
 from odf.style import Style, MasterPage, PageLayout, PageLayoutProperties, \
 TextProperties, GraphicProperties, ParagraphProperties, DrawingPageProperties
 from odf.text import P
-from odf.draw  import Page, Frame, TextBox, Image, LayerSet, Layer
+from odf.draw  import Page, Frame, TextBox, LayerSet, Layer
 from xml.dom import minidom
 
 def load_suras(xmlfilename, translationfilename):
