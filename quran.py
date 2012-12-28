@@ -20,8 +20,6 @@ from odf.text import P
 from odf.draw  import Page, Frame, TextBox, Image, LayerSet, Layer
 from xml.dom import minidom
 
-# also defined getImageData function that returns content_type, width, height of image.
-
 def load_suras(xmlfilename, translationfilename):
     xmldoc = minidom.parse(xmlfilename)
     suras = {}
@@ -57,8 +55,6 @@ def create_presentation(sura_number, outputfile, start=None, end=None):
     ls.addElement(Layer(name="title"))
     doc.masterstyles.addElement(ls)
 
-    # Style for the title frame of the page
-    # We set a centered 34pt font with yellowish background
     titlestyle = Style(name="MyMaster-title", family="presentation")
     titlestyle.addElement(ParagraphProperties(textalign="center"))
     titlestyle.addElement(TextProperties(fontsize="60pt", fontsizeasian="96pt", fontsizecomplex="96pt", color="#ffffff", fontfamily="'Al Bayan'", fontfamilyasian="'Al Bayan'", fontfamilycomplex="'Al Bayan'"))
