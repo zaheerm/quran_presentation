@@ -190,7 +190,7 @@ def create_presentation(sura_number, outputfile, start=None, end=None):
     textbox = TextBox()
     titleframe.addElement(textbox)
     titletext = "Sura %s" % (SURA_NAMES[sura_number],)
-    if start != 1:
+    if start:
         titletext += "\nAyat %s to %s" % (start, end)
     textbox.addElement(P(stylename=titlestyle, text=titletext))
 
