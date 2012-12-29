@@ -194,7 +194,7 @@ def create_presentation(sura_number, outputfile, start=None, end=None):
         titletext += "\nAyat %s to %s" % (start, end)
     textbox.addElement(P(stylename=titlestyle, text=titletext))
 
-    if sura_number != 9 and not (sura_number == 1 and int(start) != 1):
+    if sura_number != 9 and not (sura_number == 1 and int(start) == 1):
         # add bismillah
         page = Page(stylename=dp, masterpagename=masterpage)
         doc.presentation.addElement(page)

@@ -1,0 +1,254 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<TITLE>Quran</TITLE>
+
+
+<script language="javascript">
+
+CharPerLine = 70;
+VersesInSura= new Array(115);
+VersesInSura[1] = 7   ;
+VersesInSura[2] = 286 ;
+VersesInSura[3] = 200;
+VersesInSura[4] = 176;
+VersesInSura[5] = 120;
+VersesInSura[6] = 165;
+VersesInSura[7] = 206;
+VersesInSura[8] = 75 ;
+VersesInSura[9] = 129;
+
+VersesInSura[10] = 109;
+VersesInSura[11] = 123;
+VersesInSura[12] = 111;
+VersesInSura[13] = 43 ;
+VersesInSura[14] = 52 ;
+VersesInSura[15] = 99 ;
+VersesInSura[16] = 128;
+VersesInSura[17] = 111;
+VersesInSura[18] = 110;
+VersesInSura[19] = 98 ;
+
+VersesInSura[20] = 135;
+VersesInSura[21] = 112;
+VersesInSura[22] = 78 ;
+VersesInSura[23] = 118;
+VersesInSura[24] = 64 ;
+VersesInSura[25] = 77 ;
+VersesInSura[26] = 227;
+VersesInSura[27] = 93 ;
+VersesInSura[28] = 88 ;
+VersesInSura[29] = 69 ;
+
+VersesInSura[30] = 60 ;
+VersesInSura[31] = 34 ;
+VersesInSura[32] = 30 ;
+VersesInSura[33] = 73 ;
+VersesInSura[34] = 54 ;
+VersesInSura[35] = 45 ;
+VersesInSura[36] = 83 ;
+VersesInSura[37] = 182;
+VersesInSura[38] = 88 ;
+VersesInSura[39] = 75 ;
+
+VersesInSura[40] = 85 ;
+VersesInSura[41] = 54 ;
+VersesInSura[42] = 53 ;
+VersesInSura[43] = 89 ;
+VersesInSura[44] = 59 ;
+VersesInSura[45] = 37 ;
+VersesInSura[46] = 35 ;
+VersesInSura[47] = 38 ;
+VersesInSura[48] = 29 ;
+VersesInSura[49] = 18 ;
+
+VersesInSura[50] = 45 ;
+VersesInSura[51] = 60 ;
+VersesInSura[52] = 49 ;
+VersesInSura[53] = 62 ;
+VersesInSura[54] = 55 ;
+VersesInSura[55] = 78 ;
+VersesInSura[56] = 96 ;
+VersesInSura[57] = 29 ;
+VersesInSura[58] = 22 ;
+VersesInSura[59] = 24 ;
+
+VersesInSura[60] = 13 ;
+VersesInSura[61] = 14 ;
+VersesInSura[62] = 11 ;
+VersesInSura[63] = 11 ;
+VersesInSura[64] = 18 ;
+VersesInSura[65] = 12 ;
+VersesInSura[66] = 12 ;
+VersesInSura[67] = 30 ;
+VersesInSura[68] = 52 ;
+VersesInSura[69] = 52 ;
+
+VersesInSura[70] = 44 ;
+VersesInSura[71] = 28 ;
+VersesInSura[72] = 28 ;
+VersesInSura[73] = 20 ;
+VersesInSura[74] = 56 ;
+VersesInSura[75] = 40 ;
+VersesInSura[76] = 31 ;
+VersesInSura[77] = 50 ;
+VersesInSura[78] = 40 ;
+VersesInSura[79] = 46 ;
+
+VersesInSura[80] = 42 ;
+VersesInSura[81] = 29 ;
+VersesInSura[82] = 19 ;
+VersesInSura[83] = 36 ;
+VersesInSura[84] = 25 ;
+VersesInSura[85] = 22 ;
+VersesInSura[86] = 17 ;
+VersesInSura[87] = 19 ;
+VersesInSura[88] = 26 ;
+VersesInSura[89] = 30 ;
+
+VersesInSura[90] = 20 ;
+VersesInSura[91] = 15 ;
+VersesInSura[92] = 21 ;
+VersesInSura[93] = 11 ;
+VersesInSura[94] = 8  ;
+VersesInSura[95] = 8  ;
+VersesInSura[96] = 19 ;
+VersesInSura[97] = 5  ;
+VersesInSura[98] = 8  ;
+VersesInSura[99] = 8;
+
+VersesInSura[100] = 11 ;
+VersesInSura[101] = 11 ;
+VersesInSura[102] = 8 ;
+VersesInSura[103] = 3 ;
+VersesInSura[104] = 9 ;
+VersesInSura[105] = 5 ;
+VersesInSura[106] = 4 ;
+VersesInSura[107] = 7 ;
+VersesInSura[108] = 3 ;
+VersesInSura[109] = 6 ;
+
+VersesInSura[110] = 3 ;
+VersesInSura[111] = 5 ;
+VersesInSura[112] = 4 ;
+VersesInSura[113] = 5 ;
+VersesInSura[114] = 6 ;
+
+
+function bodyLoaded() {
+	var saved = 1; // surat al-fatiha by default
+	document.getElementById("DisplaySearch").sura.selectedIndex = saved - 1;
+}
+
+function suraClicked(suraControl, toAyaControl, fromAyaControl) {
+	toAyaControl.value = VersesInSura[suraControl.value];
+	fromAyaControl.value = Math.min(fromAyaControl.value, toAyaControl.value);	
+}
+
+function setGreatestAyaBound(sura, toAyaControl) {
+	var toAya = toAyaControl.value;
+	toAya = Math.min(toAya, VersesInSura[sura]);
+	toAya = Math.max(toAya, 1); // TODO: incorporate 0 value for surah name
+	toAyaControl.value = toAya;
+}
+
+</script>
+
+</head>
+
+<body onload="javascript:bodyLoaded()">
+<center><b>The Noble Quran</b>
+<center><form action="/" 
+	METHOD="post" Name="DisplaySearch" id="DisplaySearch">
+<table>
+		<TR>
+		    <TD><font size="-1"><b>Surah (Chapter):</font></b> </td>
+		</TR>
+	<TR>	
+        <td valign=top>
+	<select class=formelem name="sura" size="15" style="font-size: 11px;" onChange = "javascript:suraClicked(sura, toaya, fromaya)">
+	<option value="1" SELECTED>1. al-Faatiha (The Opening)</option>
+	<option value="2">2. al-Baqara (The Cow)</option>
+	<option value="3">3. aal-`Imraan (The Family of `Imraan)</option>
+	<option value="4">4. an-Nisaa' (The Women)</option>
+	<option value="5">5. al-Maaida (The Table)</option>
+	<option value="6">6. al-An`aam (The Cattle)</option>
+	<option value="7">7. al-A`araaf (The Heights)</option>
+	<option value="8">8. al-Anfaal (The Spoils of War)</option>
+	<option value="9">9. at-Tawba (The Repentance)</option>
+	<option value="10">10. Yunus (Jonas)</option>
+	<option value="11">11. Hud (Hud)</option>
+	<option value="12">12. Yusuf (Joseph)</option>
+	<option value="13">13. ar-Ra`ad (The Thunder)</option>
+	<option value="14">14. Ibrahim (Abraham)</option>
+	<option value="15">15. al-Hijr (The Rock)</option>
+	<option value="16">16. an-Nahl (The Bee)</option>
+	<option value="17">17. al-Israa' (The Night Journey)</option>
+	<option value="18">18. al-Kahf (The Cave)</option>
+	<option value="19">19. Maryam (Mary)</option>
+	<option value="20">20. Taa-haa (Taa-haa)</option>
+	<option value="21">21. al-Anbiyaa (The Prophets)</option>
+	<option value="22">22. al-Hajj (The Pilgrimage)</option>
+	<option value="23">23. al-Mu'minoon (The Believers)</option>
+	<option value="24">24. an-Noor (The Light)</option>
+	<option value="25">25. al-Furqaan (The Criterion)</option>
+	<option value="26">26. ash-Shu`araa (The Poets)</option>
+	<option value="27">27. an-Naml (The Ant)</option>
+	<option value="28">28. al-Qasas (The Stories)</option>
+	<option value="29">29. al-`Ankaboot (The Spider)</option>
+	<option value="30">30. ar-Room (The Romans)</option>
+	<option value="31">31. Luqman (Luqman)</option>
+	<option value="32">32. as-Sajda (The Prostration)</option>
+	<option value="33">33. al-Ahzaab (The Clans)</option>
+	<option value="34">34. Saba (Sheba)</option>
+	<option value="35">35. Faatir (The Originator)</option>
+	<option value="36">36. Yaseen (Yaseen)</option>
+	<option value="37">37. as-Saaffaat (Those drawn up in Ranks)</option>
+	<option value="38">38. Saad (The letter 'saad')</option>
+	<option value="39">39. az-Zumar (The Groups)</option>
+	<option value="40">40. al-Ghaafir (The Forgiver)</option>
+	<option value="41">41. Fussilat (Explained in detail)</option>
+	<option value="42">42. ash-Shura (Consultation)</option>
+	<option value="43">43. az-Zukhruf (Ornaments of gold)</option>
+	<option value="44">44. ad-Dukhaan (The Smoke)</option>
+	<option value="45">45. al-Jaathiya (Crouching)</option>
+	<option value="46">46. al-Ahqaf (The Dunes)</option>
+	<option value="47">47. Muhammad (Muhammad)</option>
+	<option value="48">48. al-Fath (The Victory)</option>
+	<option value="49">49. al-Hujraat (The Inner Apartments)</option>
+	<option value="50">50. Qaaf (The letter 'qaaf')</option>
+	<option value="51">51. adh-Dhaariyat (The Winnowing Winds)</option>
+	<option value="52">52. at-Tur (The Mount)</option><option value="53">53. an-Najm (The Star)</option><option value="54">54. al-Qamar (The Moon)</option><option value="55">55. ar-Rahman (The Beneficent)</option><option value="56">56. al-Waaqia (The Inevitable)</option><option value="57">57. al-Hadid (The Iron)</option><option value="58">58. al-Mujaadila (The Pleading Woman)</option><option value="59">59. al-Hashr (The Exile)</option><option value="60">60. al-Mumtahina (She that is to be examined)</option><option value="61">61. as-Saff (The Ranks)</option><option value="62">62. al-Jumu`a (Friday)</option><option value="63">63. al-Munaafiqoon (The Hypocrites)</option><option value="64">64. at-Taghaabun (Mutual Disillusion)</option><option value="65">65. at-Talaaq (Divorce)</option><option value="66">66. at-Tahrim (The Prohibition)</option><option value="67">67. al-Mulk (The Sovereignty)</option><option value="68">68. al-Qalam (The Pen)</option><option value="69">69. al-Haaqqa (The Reality)</option><option value="70">70. al-Ma`aarij (The Ascending Stairways)</option><option value="71">71. Nooh (Nooh)</option><option value="72">72. al-Jinn (the Jinn)</option><option value="73">73. al-Muzzammil (The Enshrouded One)</option><option value="74">74. al-Muddaththir (The Cloaked One)</option><option value="75">75. al-Qiyaama (The Resurrection)</option><option value="76">76. al-Insaan (Man)</option><option value="77">77. al-Mursalaat (The Emissaries)</option><option value="78">78. an-Naba (The Announcement)</option><option value="79">79. an-Naazi`aat (Those who drag forth)</option><option value="80">80. `Abasa (He frowned)</option><option value="81">81. at-Takwir (The Overthrowing)</option><option value="82">82. al-Infitaar (The Cleaving)</option><option value="83">83. al-Mutaffifin (Defrauding)</option><option value="84">84. al-Inshiqaaq (The Splitting Open)</option><option value="85">85. al-Burooj (The Constellations)</option><option value="86">86. at-Taariq (The Morning Star)</option><option value="87">87. al-A`ala (The Most High)</option><option value="88">88. al-Ghaashiya (The Overwhelming)</option><option value="89">89. al-Fajr (The Dawn)</option><option value="90">90. al-Balad (The City)</option><option value="91">91. ash-Shams (The Sun)</option><option value="92">92. al-Lail (The Night)</option><option value="93">93. ad-Dhuha (The Morning Hours)</option><option value="94">94. al-Inshira (The Consolation)</option><option value="95">95. at-Tin (The Fig)</option><option value="96">96. al-`Alaq (The Clot)</option><option value="97">97. al-Qadr (The Power, Fate)</option><option value="98">98. al-Bayyina (The Evidence)</option><option value="99">99. az-Zalzala (The Earthquake)</option><option value="100">100. al-`Aadiyaat (The Chargers)</option><option value="101">101. al-Qaari`a (The Calamity)</option><option value="102">102. at-Takaathur (Competition)</option><option value="103">103. al-`Asr (The Declining Day, Epoch)</option><option value="104">104. al-Humaza (The Traducer)</option><option value="105">105. al-Fil (The Elephant)</option><option value="106">106. Quraish (Quraysh)</option><option value="107">107. al-Maa`un (Almsgiving)</option><option value="108">108. al-Kawthar (Abundance)</option><option value="109">109. al-Kaafiroon (The Disbelievers)</option><option value="110">110. an-Nasr (Divine Support)</option><option value="111">111. al-Lahab (The Flame)</option><option value="112">112. al-Ikhlaas (Sincerity)</option><option value="113">113. al-Falaq (The Dawn)</option><option value="114">114. an-Naas (Mankind)</option>
+
+	    </select> 
+            </TD>
+</tr>
+</table>
+</tr>
+<tr>
+<td valign=top>
+<table>
+<tr>
+			<TD valign=top><b><font size="-1">Aayaat (Verses):</B></font></TD>
+</tr>
+<tr>
+<td valign=top>
+<table>
+<tr>
+<td>
+<font size="-1">	
+			From <INPUT class=formelem TYPE="text" name = "start" 
+				MAXLENGTH=3 VALUE="1" SIZE=3 onChange="javascript:setGreatestAyaBound(Sura.value, fAya)"> 
+				To 
+			<INPUT class=formelem TYPE="text" MAXLENGTH=3 NAME="end" VALUE="7" SIZE=3 onChange="javascript:setGreatestAyaBound(Sura.value, tAya)">
+		</font>
+</td>
+<td>
+<input class=formelem type="submit" value="Generate presentation"> 
+</td>
+</tr>
+</table>
+</form>
+</body>
+</html>

@@ -1,3 +1,6 @@
+import os
+import tempfile
+
 from flask import Flask
 from flask import request
 from flask import render_template
@@ -13,17 +16,19 @@ def get_quran():
         start_ayat = None
         end_ayat = None
         try:
-            start_ayat = request.form['start']
-            end_ayat = request.form['end']
+            start_ayat = int(request.form['start'])
+            end_ayat = int(request.form['end'])
         except KeyError:
             pass
-        quran.create_presentation(sura, "/tmp/test.odp", start, end)
+        _, filename = tempfile.mkstemp()
+        quran.create_presentation(int(sura), filename, start_ayat, end_ayat)
         bytes = None
-        with open("/tmp/test.odp", "rb") as f:
+        with open(filename, "rb") as f:
             bytes = f.read()
+        os.unlink(filename)
         return (bytes, 200, {"Content-Type": "application/vnd.oasis.opendocument.presentation"})
     else:
         return render_template('quranform.html')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
