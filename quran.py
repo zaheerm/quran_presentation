@@ -9,7 +9,7 @@ Options:
   --end=<ayat>               End ayat
   --arabic-font=<arabicfont> Font to use for arabic [default: Calibri]
 """
-
+import os
 import docopt
 import csv
 from odf.opendocument import OpenDocumentPresentation
@@ -137,14 +137,15 @@ SURA_NAMES = {
 
 
 def load_suras(xmlfilename, translationfilename):
-    xmldoc = minidom.parse(xmlfilename)
+    the_dir = os.path.dirname(os.path.realpath(__file__))
+    xmldoc = minidom.parse(os.path.join(the_dir, xmlfilename))
     suras = {}
     for sura in xmldoc.getElementsByTagName("sura"):
         this_sura = {}
         for ayat in sura.getElementsByTagName("aya"):
             this_sura[int(ayat.getAttribute("index"))] = dict(arabic=ayat.getAttribute("text"))
         suras[int(sura.getAttribute("index"))] = this_sura
-    for row in csv.reader(open(translationfilename, "r")):
+    for row in csv.reader(open(os.path.join(the_dir, translationfilename), "r")):
         sura = int(row[1])
         ayat = int(row[2])
         english = row[3]
@@ -195,17 +196,17 @@ def create_presentation(sura_number, outputfile, start=None, end=None, arabic_fo
         titletext += "\nAyat %s to %s" % (start, end)
     textbox.addElement(P(stylename=titlestyle, text=titletext))
 
-    if sura_number != 9 and not (sura_number == 1 and int(start) == 1):
+    if sura_number != 9 and not (sura_number == 1 and (start is None or int(start) == 1)):
         # add bismillah
         page = Page(stylename=dp, masterpagename=masterpage)
         doc.presentation.addElement(page)
-        titleframe = Frame(stylename=titlestyle, width="800pt", height="300pt", x="0pt", y="0pt")
+        titleframe = Frame(stylename=titlestyle, width="800pt", height="270pt", x="0pt", y="30pt")
         page.addElement(titleframe)
         textbox = TextBox()
         titleframe.addElement(textbox)
         ayat = suras[1][1]
         textbox.addElement(P(stylename=titlestyle, text=ayat["arabic"]))
-        secondframe = Frame(stylename=titlestyle, width="800pt", height="300pt", x="0pt", y="300pt")
+        secondframe = Frame(stylename=titlestyle, width="800pt", height="270pt", x="0pt", y="300pt")
         page.addElement(secondframe)
         secondbox = TextBox()
         secondframe.addElement(secondbox)
@@ -214,17 +215,16 @@ def create_presentation(sura_number, outputfile, start=None, end=None, arabic_fo
         if start is None or (number >= int(start) and number <= int(end)):
             page = Page(stylename=dp, masterpagename=masterpage)
             doc.presentation.addElement(page)
-            titleframe = Frame(stylename=titlestyle, width="800pt", height="300pt", x="0pt", y="0pt")
+            titleframe = Frame(stylename=titlestyle, width="800pt", height="270pt", x="0pt", y="30pt")
             page.addElement(titleframe)
             textbox = TextBox()
             titleframe.addElement(textbox)
             textbox.addElement(P(stylename=titlestyle, text=ayat["arabic"]))
-            secondframe = Frame(stylename=titlestyle, width="800pt", height="300pt", x="0pt", y="300pt")
+            secondframe = Frame(stylename=titlestyle, width="800pt", height="270pt", x="0pt", y="300pt")
             page.addElement(secondframe)
             secondbox = TextBox()
             secondframe.addElement(secondbox)
             secondbox.addElement(P(stylename=titlestyle, text=ayat["english"]))
-            print "Added ", number, ayat
     doc.save(outputfile)
 
 if __name__ == '__main__':

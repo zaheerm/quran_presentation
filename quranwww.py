@@ -8,6 +8,7 @@ from flask import render_template
 import quran
 
 app = Flask(__name__)
+app.debug = True
 
 @app.route("/", methods=['GET', 'POST'])
 def get_quran():
