@@ -2,11 +2,12 @@
 quran.py
 
 Usage:
-  quran.py <sura> <outputfile> [--start=<ayat>] [--end=<ayat>]
+  quran.py <sura> <outputfile> [--start=<ayat>] [--end=<ayat>] [--arabic-font=<arabicfont>]
 
 Options:
-  --start=<ayat>        Start ayat
-  --end=<ayat>          End ayat
+  --start=<ayat>             Start ayat
+  --end=<ayat>               End ayat
+  --arabic-font=<arabicfont> Font to use for arabic [default: Calibri]
 """
 
 import docopt
@@ -150,7 +151,7 @@ def load_suras(xmlfilename, translationfilename):
         suras[sura][ayat]["english"] = english
     return suras
 
-def create_presentation(sura_number, outputfile, start=None, end=None):
+def create_presentation(sura_number, outputfile, start=None, end=None, arabic_font="Calibri"):
     suras = load_suras("quran-uthmani.xml", "shakir_table.csv")
     doc = OpenDocumentPresentation()
 
@@ -172,7 +173,7 @@ def create_presentation(sura_number, outputfile, start=None, end=None):
 
     titlestyle = Style(name="MyMaster-title", family="presentation")
     titlestyle.addElement(ParagraphProperties(textalign="center"))
-    titlestyle.addElement(TextProperties(fontsize="60pt", fontsizeasian="96pt", fontsizecomplex="96pt", color="#ffffff", fontfamily="Calibri", fontfamilyasian="Calibri", fontfamilycomplex="Calibri"))
+    titlestyle.addElement(TextProperties(fontsize="60pt", fontsizeasian="96pt", fontsizecomplex="96pt", color="#ffffff", fontfamily="Calibri", fontfamilyasian=arabic_font, fontfamilycomplex=arabic_font))
     titlestyle.addElement(GraphicProperties(fillcolor="#000000"))
     doc.styles.addElement(titlestyle)
     masterstyle = Style(name="MyMaster-dp", family="drawing-page")
@@ -228,4 +229,4 @@ def create_presentation(sura_number, outputfile, start=None, end=None):
 
 if __name__ == '__main__':
     arguments = docopt.docopt(__doc__, version='quran.py 0.1')
-    create_presentation(int(arguments["<sura>"]), arguments["<outputfile>"], arguments["--start"], arguments["--end"])
+    create_presentation(int(arguments["<sura>"]), arguments["<outputfile>"], arguments["--start"], arguments["--end"], arguments["--arabic-font"])
