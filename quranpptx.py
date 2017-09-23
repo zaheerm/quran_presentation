@@ -167,9 +167,11 @@ def create_presentation(sura_number, outputfile, start=None, end=None, arabic_fo
         ayat = suras[1][1]
         slide = prs.slides.add_slide(title_slide_layout)
         title = slide.shapes.title
+        title.text_frame.paragraphs[0].text
         subtitle = slide.placeholders[1]
 
         title.text = ayat["arabic"]
+        title.text_frame.paragraphs[0].font.name = 'Arial'
         subtitle.text = ayat["english"]
 
     for number, ayat in suras[sura_number].iteritems():
@@ -179,6 +181,7 @@ def create_presentation(sura_number, outputfile, start=None, end=None, arabic_fo
             subtitle = slide.placeholders[1]
 
             title.text = ayat["arabic"]
+            title.text_frame.paragraphs[0].font.name = 'Arial'
             subtitle.text = ayat["english"] + " [{}]".format(number)
 
     prs.save(outputfile)
