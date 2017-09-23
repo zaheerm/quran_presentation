@@ -7,7 +7,7 @@ Usage:
 Options:
   --start=<ayat>             Start ayat
   --end=<ayat>               End ayat
-  --arabic-font=<arabicfont> Font to use for arabic [default: Calibri]
+  --arabic-font=<arabicfont> Font to use for arabic [default: Arial]
 """
 import os
 import docopt
@@ -151,8 +151,7 @@ def load_suras(xmlfilename, translationfilename):
         suras[sura][ayat]["english"] = english
     return suras
 
-def create_presentation(sura_number, outputfile, start=None, end=None, arabic_font="Calibri"):
-    suras = load_suras("quran-uthmani.xml", "shakir_table.csv")
+def create_presentation(suras, sura_number, outputfile, start=None, end=None, arabic_font="Calibri"):
     prs = Presentation()
     title_slide_layout = prs.slide_layouts[0]
     slide = prs.slides.add_slide(title_slide_layout)
@@ -171,7 +170,7 @@ def create_presentation(sura_number, outputfile, start=None, end=None, arabic_fo
         subtitle = slide.placeholders[1]
 
         title.text = ayat["arabic"]
-        title.text_frame.paragraphs[0].font.name = 'Arial'
+        title.text_frame.paragraphs[0].font.name = arabic_font
         subtitle.text = ayat["english"]
 
     for number, ayat in suras[sura_number].iteritems():
@@ -181,11 +180,12 @@ def create_presentation(sura_number, outputfile, start=None, end=None, arabic_fo
             subtitle = slide.placeholders[1]
 
             title.text = ayat["arabic"]
-            title.text_frame.paragraphs[0].font.name = 'Arial'
+            title.text_frame.paragraphs[0].font.name = arabic_font
             subtitle.text = ayat["english"] + " [{}]".format(number)
 
     prs.save(outputfile)
 
 if __name__ == '__main__':
     arguments = docopt.docopt(__doc__, version='quran.py 0.1')
-    create_presentation(int(arguments["<sura>"]), arguments["<outputfile>"], arguments["--start"], arguments["--end"], arguments["--arabic-font"])
+    suras = load_suras("quran-uthmani.xml", "shakir_table.csv")
+    create_presentation(suras, int(arguments["<sura>"]), arguments["<outputfile>"], arguments["--start"], arguments["--end"], arguments["--arabic-font"])
